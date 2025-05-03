@@ -1,0 +1,20 @@
+{
+  "name": "nikan2010/accessible-resources",
+  "description": "Manage user access to various resources with caching",
+  "autoload": {
+    "psr-4": {
+      "AccessibleResources\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "AccessibleResources\\AccessibleResourcesServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "php": "^8.0",
+    "illuminate/support": "^9.0|^10.0|^11.0"
+  }
+}
