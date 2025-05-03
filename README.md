@@ -1,23 +1,23 @@
-# Accessible Resources for Laravel
+# 🎯 پکیج Accessible Resources برای لاراول
 
-This Laravel package allows you to control user access to various resources (like Product, Category, etc.) using a polymorphic relation, with smart caching and a global query macro.
-
----
-
-## 🚀 Features
-
-- Polymorphic many-to-many access: users can access multiple models like products, categories, etc.
-- Global macro `withAccessibleTo()` for filtering data
-- Smart daily cache for performance
-- Central config file to define models and admin role
+این پکیج به شما اجازه می‌دهد دسترسی کاربران به منابع مختلف (مثل محصولات، دسته‌بندی‌ها و ...) را با استفاده از رابطه‌ی چندشکلی (polymorphic) و کش هوشمند مدیریت کنید.
 
 ---
 
-## 📦 Installation
+## ✅ امکانات
 
-1. Clone or download this package inside your Laravel project, e.g. under `packages/accessible-resources`.
+- پشتیبانی از چند مدل مختلف به‌صورت polymorphic (مثل Product, Category و ...)
+- ماکروی `withAccessibleTo()` برای فیلتر کردن داده‌ها در همه مدل‌ها
+- کش هوشمند برای افزایش کارایی
+- فایل تنظیمات برای تعریف مدل‌ها و نقش ادمین
 
-2. Add this to your project's `composer.json`:
+---
+
+## 🔧 نصب پکیج
+
+۱. پکیج را داخل پوشه‌ی `packages/accessible-resources` در پروژه لاراول خود قرار دهید.
+
+۲. فایل `composer.json` پروژه‌تان را ویرایش کرده و این قسمت را اضافه کنید:
 
 ```json
 "repositories": [
@@ -28,7 +28,7 @@ This Laravel package allows you to control user access to various resources (lik
 ],
 ```
 
-3. Require the package:
+۳. نصب پکیج با composer:
 
 ```bash
 composer require nikan2010/accessible-resources:@dev
@@ -36,16 +36,16 @@ composer require nikan2010/accessible-resources:@dev
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ پیکربندی
 
-Publish the config and migration:
+برای انتشار فایل‌های تنظیمات و مهاجرت (migration):
 
 ```bash
 php artisan vendor:publish --tag=accessible-resources
 php artisan migrate
 ```
 
-Edit `config/accessible-resources.php` to define your models:
+سپس فایل `config/accessible-resources.php` را ویرایش کنید:
 
 ```php
 'resources' => [
@@ -58,9 +58,9 @@ Edit `config/accessible-resources.php` to define your models:
 
 ---
 
-## 🧩 Usage
+## 🧩 استفاده
 
-### 1. Add Trait to User model:
+### ۱. افزودن Trait به مدل User
 
 ```php
 use AccessibleResources\Traits\HasAccessibleResources;
@@ -71,7 +71,7 @@ class User extends Authenticatable
 }
 ```
 
-### 2. Assign Access to Resource
+### ۲. اختصاص دسترسی
 
 ```php
 $user->accessibleResources(\App\Models\Product::class)->attach($productId);
@@ -79,22 +79,22 @@ $user->accessibleResources(\App\Models\Product::class)->attach($productId);
 
 ---
 
-### 3. Use Macro in Queries
+### ۳. استفاده از ماکرو در کوئری‌ها
 
 ```php
 $orders = Order::query()->withAccessibleTo(
     auth()->user(),
-    'product', // relation name
-    'product', // key from config file
-    'product_id' // optional foreign key for belongsTo
+    'product', // نام رابطه
+    'product', // کلید تعریف‌شده در فایل config
+    'product_id' // (اختیاری) برای روابط belongsTo
 )->get();
 ```
 
 ---
 
-## 💡 Cache
+## 📦 کش هوشمند
 
-Access is cached for 1 day per resource type. You can clear it manually:
+دسترسی کاربر برای هر منبع تا ۱ روز کش می‌شود. برای پاک‌سازی دستی کش:
 
 ```php
 $user->clearCachedAccessibleResourceIds(\App\Models\Product::class);
@@ -102,6 +102,6 @@ $user->clearCachedAccessibleResourceIds(\App\Models\Product::class);
 
 ---
 
-## 📃 License
+## 📃 مجوز استفاده
 
-MIT – Free to use and modify.
+کد این پکیج آزاد است (MIT License) و می‌توانید آزادانه در پروژه‌های شخصی و تجاری استفاده کنید.
