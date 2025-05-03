@@ -1,6 +1,8 @@
 {
   "name": "nikan2010/accessible-resources",
   "description": "Manage user access to various resources with caching",
+  "type": "library",
+  "license": "MIT",
   "autoload": {
     "psr-4": {
       "AccessibleResources\\": "src/"
