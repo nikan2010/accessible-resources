@@ -23,14 +23,14 @@ class AccessibleResourceMacro
 
             if ($foreignKey) {
                 return $this->whereIn($foreignKey, $ids)->with([$relation => function ($q) use ($ids) {
-                    $q->whereIn('id', $ids);
+                    $q->whereIn($q->getModel()->getQualifiedKeyName(), $ids);
                 }]);
             }
 
             return $this->whereHas($relation, function ($q) use ($ids) {
-                $q->whereIn('id', $ids);
+                $q->whereIn($q->getModel()->getQualifiedKeyName(), $ids);
             })->with([$relation => function ($q) use ($ids) {
-                $q->whereIn('id', $ids);
+                $q->whereIn($q->getModel()->getQualifiedKeyName(), $ids);
             }]);
         });
     }
