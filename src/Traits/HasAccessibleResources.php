@@ -13,10 +13,15 @@ trait HasAccessibleResources
 
     public function getCachedAccessibleResourceIds(string $type): array
     {
+        $table = (new $type)->getTable();
+
         $key = "user:{$this->id}:resources:" . md5($type);
 
-        return Cache::remember($key, now()->addDay(), function () use ($type) {
-            return $this->accessibleResources($type)->select($type::getTable() . '.id')->pluck('id')->toArray();
+        return Cache::remember($key, now()->addDay(), function () use ($type, $table) {
+            return $this->accessibleResources($type)
+                ->select("{$table}.id")
+                ->pluck("id")
+                ->toArray();
         });
     }
 
