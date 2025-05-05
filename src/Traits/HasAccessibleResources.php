@@ -16,8 +16,7 @@ trait HasAccessibleResources
         $key = "user:{$this->id}:resources:" . md5($type);
 
         return Cache::remember($key, now()->addDay(), function () use ($type) {
-            return $this->accessibleResources($type)->select($type::getTable() . '.id')->pluck('id')->toArray();;
-//            return $this->accessibleResources($type)->pluck("id")->toArray();
+            return $this->accessibleResources($type)->select($type::getTable() . '.id')->pluck('id')->toArray();
         });
     }
 
